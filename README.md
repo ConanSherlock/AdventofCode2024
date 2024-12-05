@@ -1,2 +1,2 @@
-AdventOfCode2024
+# AdventOfCode2024
 Advent of Code 2024 done using Python
