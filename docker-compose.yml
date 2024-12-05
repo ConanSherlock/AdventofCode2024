@@ -1,0 +1,47 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:alpine
+    container_name: jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins-data:/var/jenkins_home
+
+  dev-service:
+    build:
+      context: ./dev-service
+      dockerfile: Dockerfile
+    container_name: dev-container
+    volumes:
+      - ./:/usr/src/app:rw
+    working_dir: /usr/src/app
+    command: [ "tail", "-f", "/dev/null" ]
+
+  jenkins-agent:
+    build:
+      context: ./dev-service
+      dockerfile: Dockerfile
+    container_name: jenkins-agent
+    environment:
+      - JENKINS_URL=http://localhost:8080
+      - JENKINS_AGENT_NAME=agent-1
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+    volumes:
+      - jenkins-agent-data:/home/jenkins/agent
+    depends_on:
+      - jenkins
+
+volumes:
+  jenkins-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: C:/Jenkins
+  jenkins-agent-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: C:/JenkinsAgent
