@@ -40,8 +40,8 @@ class Day2:
             levels_diff = self._levels_list[i] - level
             if not self._min_diff <= abs(levels_diff) <= self._max_diff:
                 # Unsafe Step
-                self._safe = False
-                return
+                    self._safe = False
+                    return
 
             if levels_diff > 0 and not self._ascending:
                 self._descending = True
@@ -56,14 +56,34 @@ class Day2:
         self._safe_reports += 1
         return
 
+    def _check_safety_with_dampener(self):
+        diff_list = []
 
-    def is_safe(self, report:str)-> bool:
+        for i, level in enumerate(self._levels_list[1:]):
+            levels_diff = self._levels_list[i] - level
+            diff_list.append(levels_diff)
+
+        if all(self._min_diff <= x <= self._max_diff and x > 0 for x in diff_list):
+            self._safe = True
+            self._safe_reports += 1
+            return
+        elif all(self._max_diff*-1 <= x <= self._min_diff*-1 and x < 0 for x in diff_list):
+            self._safe = True
+            self._safe_reports += 1
+            return
+
+
+
+    def is_safe(self, report:str, problem_dampener: bool=False)-> bool:
         self._safe = False
         self._ascending = False
         self._descending = False
 
         self._parse_list(report)
-        self._check_safety()
+        if problem_dampener:
+            self._check_safety_with_dampener()
+        else:
+            self._check_safety()
 
         return self._safe
     
@@ -87,8 +107,11 @@ if __name__ == "__main__":
         "Part A Total number of safe reports: %d" % day2.get_safe_reports()
     )
 
-    # day2.calc_similarity_score()
+    day2.reset()
 
-    # print(
-    #     "Part A Total similarity score between left list and right list: %d" % day2.get_total_similarity_score()
-    # )
+    for report in input_data:
+        day2.is_safe(report, True)
+
+    print(
+        "Part B Total number of safe reports with problem dampener: %d" % day2.get_safe_reports()
+    )
