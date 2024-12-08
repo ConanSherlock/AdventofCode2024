@@ -1,6 +1,5 @@
-import importlib
 import unittest
-import src.day1
+from src.day1 import Day1
 
 
 class AoC2024Day1Test(unittest.TestCase):
@@ -8,7 +7,7 @@ class AoC2024Day1Test(unittest.TestCase):
         self.day1 = None
 
     def test_calc_total_distance_part_a(self):
-        self.day1 = day1.Day1()
+        self.day1 = Day1()
 
         input_strings = ["3   4\n", "4   3\n", "2   5\n", "1   3\n", "3   9\n", "3   3\n"]
 

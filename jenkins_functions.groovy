@@ -9,4 +9,15 @@ def runCondaWin(command) {
     return processCheck
 }
 
+def runVenvUnix(command) {
+    def processCheck = """${bash(returnStatus: true,
+   script: '''
+               source /venv/Scripts/activate
+               ''' command '''
+           '''
+   )}"""
+
+    return processCheck
+}
+
 return this
