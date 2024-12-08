@@ -56,13 +56,7 @@ class Day2:
         self._safe_reports += 1
         return
 
-    def _check_safety_with_dampener(self):
-        diff_list = []
-
-        for i, level in enumerate(self._levels_list[1:]):
-            levels_diff = self._levels_list[i] - level
-            diff_list.append(levels_diff)
-
+    def _check_bad_levels(self, diff_list):
         if all(self._min_diff <= x <= self._max_diff and x > 0 for x in diff_list):
             self._safe = True
             self._safe_reports += 1
@@ -71,6 +65,26 @@ class Day2:
             self._safe = True
             self._safe_reports += 1
             return
+
+    def _check_safety_with_dampener(self):
+        diff_list = []
+
+        for i, level in enumerate(self._levels_list[1:]):
+            levels_diff = self._levels_list[i] - level
+            diff_list.append(levels_diff)
+
+        self._check_bad_levels(diff_list)
+
+        if not self._safe:
+            for i in range(len(self._levels_list)):
+                temp_levels_list = self._levels_list[:i] + self._levels_list[i+1:]
+                diff_list = []
+                for i, level in enumerate(temp_levels_list[1:]):
+                    levels_diff = temp_levels_list[i] - level
+                    diff_list.append(levels_diff)
+                self._check_bad_levels(diff_list)
+                if self._safe:
+                    break
 
 
 
