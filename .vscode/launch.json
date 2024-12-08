@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Test day2_test.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/test/day2_test.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Python: Run day2.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/day2.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+  ]
+}

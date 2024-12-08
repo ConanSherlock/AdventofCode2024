@@ -1,0 +1,6 @@
+numpy>=2.1.0
+pandas>=2.2.3
+pre-commit>=4.0.1
+pytest
+pytest-xdist
+pytest-html

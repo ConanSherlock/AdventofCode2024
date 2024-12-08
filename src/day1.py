@@ -73,7 +73,7 @@ class Day1:
 
 if __name__ == "__main__":
 
-    day1_file_path = "../../test/input_data/2024/day1_input.txt"
+    day1_file_path = "test/input_data/day1_input.txt"
 
     with open(day1_file_path, "r") as input_file:
         input_data = input_file.readlines()
@@ -90,7 +90,6 @@ if __name__ == "__main__":
 
     day1.calc_similarity_score()
 
-    print("--- Day 1: Historian Hysteria ---")
     print(
-        "Part A Total similarity score between left list and right list: %d" % day1.get_total_similarity_score()
+        "Part B Total similarity score between left list and right list: %d" % day1.get_total_similarity_score()
     )
